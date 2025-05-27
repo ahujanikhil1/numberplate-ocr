@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Plate Recognition</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at center, #121212 0%, #000000 90%);
+      color: #3399ff; /* Changed from #00ff99 */
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.15em;
+      color: #3399ff;
+      text-shadow: 0 0 5px #3399ff;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 1rem 2rem 1rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    form {
+      background: rgba(51, 153, 255, 0.05); /* Less glow */
+      border: 2px solid #3399ff;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 0 5px #3399ff;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    input[type="file"] {
+      background: transparent;
+      color: #3399ff;
+      font-size: 1.1rem;
+      border: 2px solid #3399ff;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+      background-color: #3399ff;
+      color: #000;
+    }
+
+    button {
+      background: #3399ff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.75rem 1.25rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 0 10px #3399ff;
+    }
+
+    button:hover {
+      background-color: #1e7fdc;
+      box-shadow: 0 0 15px #1e7fdc;
+    }
+
+    .result {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff; /* Strong contrast */
+      background: #3399ff;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #3399ff;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    .invalid {
+      color: #ff3366;
+      text-shadow: 0 0 5px #ff3366;
+    }
+
+    img.uploaded-image {
+      margin-top: 2rem;
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #3399ff;
+    }
+
+    aside {
+      max-width: 300px;
+      background-color: rgba(51, 153, 255, 0.05);
+      border: 1px solid #3399ff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #3399ff;
+      box-shadow: 0 0 5px #3399ff;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    aside h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px #3399ff;
+    }
+
+    aside ul {
+      padding-left: 1.2rem;
+    }
+
+    aside li {
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: #3399ff;
+      text-shadow: 0 0 5px #3399ff;
+      background: #050505;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>Number Plate Recognition</header>
+  <main>
+    <form method="POST" enctype="multipart/form-data" autocomplete="off">
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">Upload & Detect</button>
+
+      {% if filename %}
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="uploaded-image" />
+      {% endif %}
+
+      {% if extracted_text %}
+        <div class="result">
+          Detected Plate: <strong>{{ extracted_text }}</strong>
+        </div>
+      {% elif filename %}
+        <div class="result invalid">
+          No valid number plate detected. Please try with another image.
+        </div>
+      {% endif %}
+    </form>
+
+    <aside>
+      <h3>Note:</h3>
+      <ul>
+        <li>1. The image should be clear.</li>
+        <li>2. The number plate should be aligned properly.</li>
+        <li>3. If the number plate pixels are low, it may show an error like "no plate detected".</li>
+        <li>Thank you!</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>Made by Nikhil Ahuja</footer>
+</body>
+</html>
+s are low, it may show an error like "no plate detected".</li>
+        <li>Thank you!</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>Made by Nikhil Ahuja</footer>
+</body>
+</html>
